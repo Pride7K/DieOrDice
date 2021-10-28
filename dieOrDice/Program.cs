@@ -21,13 +21,13 @@ namespace dieOrDice
 
             var differentExpectedValue = int.TryParse(dieCount, out _);
 
-            if(differentExpectedValue && dieCount.ToInt() != default(int))
+            if (differentExpectedValue && dieCount.ToInt() != default(int))
             {
                 returnValue = dieCount.ToInt();
                 return;
             }
 
-            var isValueDifferentFromZero = dieCount.ToInt() != default(int);
+            var isValueDifferentFromZero = int.TryParse(dieCount, out _) && dieCount.ToInt() != default(int);
 
 
             if (!differentExpectedValue || !isValueDifferentFromZero)
@@ -40,7 +40,7 @@ namespace dieOrDice
                     Console.WriteLine("");
 
                     differentExpectedValue = int.TryParse(dieCount, out _);
-                    if(differentExpectedValue)
+                    if (differentExpectedValue)
                     {
                         isValueDifferentFromZero = dieCount.ToInt() != default(int);
                     }

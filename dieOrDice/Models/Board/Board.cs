@@ -123,15 +123,15 @@ namespace dieOrDice.Models.Board
             var isPlayerWon = _player.RoundValue > _bot.RoundValue;
             var isBotWon = _bot.RoundValue > _player.RoundValue;
 
-            var message = $"{_player._numberOfDice} Dice Was Rolled With The Sum Of {_player.RoundValue} And ";
+            var message = String.Empty;
 
             if (isPlayerWon)
             {
-                message += $"You are the winner!";
+                message += $"{_player._numberOfDice} Dice Was Rolled With The Sum Of {_player.RoundValue} And  You are the winner!";
             }
             else if (isBotWon)
             {
-                message += $"Bot is the winner!";
+                message += $"{_bot._numberOfDice} Dice Was Rolled With The Sum Of {_bot.RoundValue} And Bot is the winner!";
             }
             else
             {
@@ -156,7 +156,7 @@ namespace dieOrDice.Models.Board
             }
             else if (isBotWon)
             {
-                message += $"Bot With {_player.Points} Points";
+                message += $"Bot With {_bot.Points} Points";
             }
             else
             {
