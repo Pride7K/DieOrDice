@@ -13,8 +13,15 @@ namespace dieOrDice.Models.Players
             _numberOfDice = diceCount;
         }
 
+
+        /// <summary>
+        ///Being a casino owner, you’re trying to get the odds in your favor. 
+        ///If you roll a specific number too many times, the casino (or our new automated statistics guy) 
+        ///detects it and makes sure it gets harder to roll that number (of your choice) again.
+        /// </summary>
         public override void GetDice()
         {
+            // Retry logic is that in case of all numbers possible were rolled
             var retry = 0;
             while (IsRepeatedNumber(this.RoundValue) || this.RoundValue == default(int) || retry < 3)
             {

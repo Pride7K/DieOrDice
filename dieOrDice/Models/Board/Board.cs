@@ -23,7 +23,9 @@ namespace dieOrDice.Models.Board
             _bot = bot;
         }
 
-
+        /// <summary>
+        /// Implement a Die (or multiple, depending how you want to solve the task)
+        /// </summary>
         public void PlayTheGame()
         {
             while (isKeepPlaying())
@@ -34,7 +36,9 @@ namespace dieOrDice.Models.Board
 
             this.GiveMatchWinner();
         }
-
+        /// <summary>
+        ///  Make Sure that the Game Runs Synchronous
+        /// </summary>
         private async static void ShowSpinner()
         {
             Action spinner = async () =>
@@ -92,6 +96,10 @@ namespace dieOrDice.Models.Board
             return choice.ToLower() == "y";
         }
 
+        /// <summary>
+        /// Since the usual die/dice roller is being replaced with an automatic solution, we need someone (or 
+        /// something) that handles the die or dice.
+        /// </summary>
         private void RollDice()
         {
             ShowSpinner();
