@@ -15,22 +15,35 @@ namespace dieOrDice
         private static void GetHowManyDices(out int returnValue)
         {
             string dieCount = String.Empty;
-            Console.Write("How many dices do you want to play with ? ");
+            Console.Write("How Many Dice Do You Want To Play With ? ");
             dieCount = Console.ReadLine();
             Console.WriteLine("");
 
-            var diffExpectedValue = int.TryParse(dieCount, out _);
+            var differentExpectedValue = int.TryParse(dieCount, out _);
 
-            if (!diffExpectedValue)
+            if(differentExpectedValue && dieCount.ToInt() != default(int))
             {
-                while (!diffExpectedValue)
+                returnValue = dieCount.ToInt();
+                return;
+            }
+
+            var isValueDifferentFromZero = dieCount.ToInt() != default(int);
+
+
+            if (!differentExpectedValue || !isValueDifferentFromZero)
+            {
+                while (!differentExpectedValue || !isValueDifferentFromZero)
                 {
                     Console.WriteLine("");
-                    Console.Write("How many dices do you want to play with ? ");
+                    Console.Write("How Many Dice Do You Want To Play With ? ");
                     dieCount = Console.ReadLine();
                     Console.WriteLine("");
 
-                    diffExpectedValue = int.TryParse(dieCount, out _);
+                    differentExpectedValue = int.TryParse(dieCount, out _);
+                    if(differentExpectedValue)
+                    {
+                        isValueDifferentFromZero = dieCount.ToInt() != default(int);
+                    }
                 }
             }
 
@@ -39,90 +52,17 @@ namespace dieOrDice
 
         private static void DisplayGreetings()
         {
-            Console.WriteLine("Welcome to the automated Die");
+            Console.WriteLine("Welcome To The Automated Die");
             Console.WriteLine("");
-        }
-
-        private static bool isKeepPlaying()
-        {
-            List<string> _acceptedChoices = new List<string>()
-            {
-                "y",
-                "n"
-            };
-
-            string choice = String.Empty;
-
-            Console.Write("Roll the Die(s) (y) or (n): ");
-            choice = Console.ReadLine();
-
-            var diffExpectedValue = String.IsNullOrEmpty(choice) || choice.Length > 1 ||
-               (choice.ToLower() != "y" && choice.ToLower() != "n");
-
-            while (diffExpectedValue)
-            {
-                Console.Write("Roll the Die(s) (y) or (n): ");
-                choice = Console.ReadLine();
-
-                diffExpectedValue = String.IsNullOrEmpty(choice) || choice.Length > 1 ||
-               (choice.ToLower() != "y" && choice.ToLower() != "n");
-
-            }
-
-            return choice.ToLower() == "y";
-        }
-
-        private async static void ShowSpinner()
-        {
-            Action spinner = async () =>
-            {
-                var counter = 0;
-                for (int i = 0; i < 2; i++)
-                {
-                    switch (counter % 4)
-                    {
-                        case 0: Console.Write("/"); break;
-                        case 1: Console.Write("-"); break;
-                        case 2: Console.Write("\\"); break;
-                        case 3: Console.Write("|"); break;
-                    }
-                    Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
-                    counter++;
-                    Thread.Sleep(100);
-                }
-
-            };
-
-            var task = new Task(spinner);
-
-            task.RunSynchronously();
-
-            await Task.WhenAll(task);
         }
 
         public static void HandleGame()
         {
-            bool keepPlaying = true;
-
             DisplayGreetings();
             GetHowManyDices(out int dicesCount);
 
             var board = new Board(new Player(dicesCount), new Bot(dicesCount));
-
-            while (keepPlaying)
-            {
-                keepPlaying = isKeepPlaying();
-                if (!keepPlaying)
-                    break;
-
-                ShowSpinner();
-
-                board.RollDice();
-                Console.WriteLine(board.RoundWinner());
-                Console.WriteLine("");
-            }
-            Console.WriteLine("");
-            Console.WriteLine(board.MatchWinner());
+            board.PlayTheGame();
         }
 
         static void Main(string[] args)
