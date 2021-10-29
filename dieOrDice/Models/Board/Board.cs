@@ -154,11 +154,11 @@ namespace dieOrDice.Models.Board
 
             if (isPlayerWon)
             {
-                message += $"You With {_player.Points.ToHumanizeWord()}{"Point".ToQuantity(_player.Points, ShowQuantityAs.None)}";
+                message += $"You With {_player.Points.ToHumanizeWord()} {"Point".ToQuantity(_player.Points, ShowQuantityAs.None)}";
             }
             else if (isBotWon)
             {
-                message += $"Bot With {_bot.Points.ToHumanizeWord()}{"Point".ToQuantity(_bot.Points, ShowQuantityAs.None)}";
+                message += $"Bot With {_bot.Points.ToHumanizeWord()} {"Point".ToQuantity(_bot.Points, ShowQuantityAs.None)}";
             }
             else
             {
