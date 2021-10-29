@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Humanizer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,11 @@ namespace dieOrDice.General
         public static int ToInt(this String value)
         {
             return int.Parse(value);
+        }
+
+        public static string ToHumanizeWord(this int value)
+        {
+            return value.ToWords(System.Globalization.CultureInfo.GetCultureInfo("en-US")).Titleize();
         }
 
         public static int GetRandomDiceValue()

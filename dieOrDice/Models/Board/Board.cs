@@ -1,4 +1,6 @@
-﻿using dieOrDice.Models.Players;
+﻿using dieOrDice.General;
+using dieOrDice.Models.Players;
+using Humanizer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -127,11 +129,11 @@ namespace dieOrDice.Models.Board
 
             if (isPlayerWon)
             {
-                message += $"{_player._numberOfDice} Dice Was Rolled With The Sum Of {_player.RoundValue} And  You are the winner!";
+                message += $"{_player._numberOfDice.ToHumanizeWord()} Dice Was Rolled With The Sum Of {_player.RoundValue.ToHumanizeWord()} And  You are the winner!";
             }
             else if (isBotWon)
             {
-                message += $"{_bot._numberOfDice} Dice Was Rolled With The Sum Of {_bot.RoundValue} And Bot is the winner!";
+                message += $"{_bot._numberOfDice.ToHumanizeWord()} Dice Was Rolled With The Sum Of {_bot.RoundValue.ToHumanizeWord()} And Bot is the winner!";
             }
             else
             {
@@ -152,11 +154,11 @@ namespace dieOrDice.Models.Board
 
             if (isPlayerWon)
             {
-                message += $"You With {_player.Points} Points";
+                message += $"You With {_player.Points.ToHumanizeWord()}{"Point".ToQuantity(_player.Points, ShowQuantityAs.None)}";
             }
             else if (isBotWon)
             {
-                message += $"Bot With {_bot.Points} Points";
+                message += $"Bot With {_bot.Points.ToHumanizeWord()}{"Point".ToQuantity(_bot.Points, ShowQuantityAs.None)}";
             }
             else
             {

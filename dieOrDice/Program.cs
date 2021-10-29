@@ -52,7 +52,7 @@ namespace dieOrDice
 
         private static void DisplayGreetings()
         {
-            Console.WriteLine("Welcome To The Automated Die");
+            Console.WriteLine("Welcome To The Automated Die(Or Dice)");
             Console.WriteLine("");
         }
 
